@@ -24,7 +24,8 @@ const Dashboard = () => {
     };
     fetchTodos();
 
-    const socket = io('http://localhost:5000');
+    const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
+
     socket.on('todoCreated', (todo) => addTodo(todo));
     socket.on('todoUpdated', (todo) => updateTodo(todo));
     socket.on('todoDeleted', (id) => removeTodo(id));
