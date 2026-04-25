@@ -112,11 +112,11 @@ const Navbar = () => {
         <span style={{ fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>2Do</span>
       </Link>
       
-      <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+      <button className="mobile-menu-btn hidden-mobile" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
         {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''} hidden-mobile`}>
         <Link to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>Todos</Link>
         
         <div className="features-trigger" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>

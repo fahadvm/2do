@@ -5,11 +5,20 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
+import MobileNav from './components/MobileNav';
 
 function App() {
   return (
     <Router>
-      <Routes>
+      <div style={{ paddingBottom: '80px' }} className="mobile-padding">
+        <style>{`
+          @media (min-width: 769px) {
+            .mobile-padding { padding-bottom: 0 !important; }
+          }
+        `}</style>
+
+        <Routes>
+
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -30,6 +39,8 @@ function App() {
           } 
         />
       </Routes>
+        <MobileNav />
+      </div>
     </Router>
   );
 }
