@@ -13,7 +13,9 @@ A premium, real-time task management application designed for modern efficiency.
 
 | Desktop Dashboard | Mobile Navigation |
 | :---: | :---: |
-| ![Desktop Dashboard](https://via.placeholder.com/600x350?text=Desktop+Dashboard) | ![Mobile Nav](https://via.placeholder.com/200x400?text=Mobile+Navbar) |
+| <img width="1898" height="895" alt="image" src="https://github.com/user-attachments/assets/456ac853-7135-422d-acdd-1369290a5870" />
+ | <img width="750" height="1600" alt="WhatsApp Image 2026-04-25 at 2 54 53 PM" src="https://github.com/user-attachments/assets/5af2eac9-263d-4ff7-99f3-8ac1c9d29d15" />
+ |
 
 ---
 
