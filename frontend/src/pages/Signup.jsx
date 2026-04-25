@@ -33,10 +33,7 @@ const Signup = () => {
       <Navbar />
       
       <div className="auth-container" style={{ paddingTop: '40px' }}>
-        <div className="animate-fade" style={{ 
-          width: '100%', 
-          maxWidth: '440px', 
-          padding: '48px',
+        <div className="animate-fade auth-card" style={{ 
           backgroundColor: '#fff',
           borderRadius: '24px',
           boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',

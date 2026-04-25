@@ -50,9 +50,36 @@ const Dashboard = () => {
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#333' }}>
       <Navbar />
+
+      <style>{`
+        .dashboard-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px;
+        }
+        .form-group {
+          display: flex;
+          gap: 12px;
+        }
+        @media (max-width: 768px) {
+          .dashboard-header {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+            margin-bottom: 32px;
+          }
+          .form-group {
+            flex-direction: column;
+          }
+          .btn-add {
+            width: 100%;
+          }
+        }
+      `}</style>
       
-      <div className="dashboard-container" style={{ marginTop: '40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+      <div className="dashboard-container">
+        <div className="dashboard-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ background: '#10b981', padding: '10px', borderRadius: '12px' }}>
               <LayoutDashboard size={24} color="white" />
@@ -73,7 +100,7 @@ const Dashboard = () => {
               onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
               style={{ fontSize: '1.1rem', fontWeight: '600', color: '#111827', border: '1px solid #e5e7eb' }}
             />
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div className="form-group">
               <input 
                 type="text" 
                 placeholder="Description (optional)" 
@@ -81,7 +108,7 @@ const Dashboard = () => {
                 onChange={(e) => setNewTodo({ ...newTodo, description: e.target.value })}
                 style={{ color: '#374151', border: '1px solid #e5e7eb' }}
               />
-              <button type="submit" className="btn-primary" disabled={loading} style={{ minWidth: '140px', backgroundColor: '#10b981' }}>
+              <button type="submit" className="btn-primary btn-add" disabled={loading} style={{ minWidth: '140px', backgroundColor: '#10b981' }}>
                 <Plus size={18} /> {loading ? 'Adding...' : 'Add Task'}
               </button>
             </div>
@@ -106,4 +133,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 

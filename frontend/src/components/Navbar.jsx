@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { 
   CheckCircle2, Search, ChevronDown, User, LogOut, 
-  Sun, Moon, Sparkles, GraduationCap, Briefcase, Heart, Leaf 
+  Sun, Moon, Sparkles, GraduationCap, Briefcase, Heart, Leaf, Menu, X
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
@@ -9,11 +9,12 @@ import useAuthStore from '../store/authStore';
 const Navbar = () => {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
-  const [showFeatures, setShowFeatures] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
+    setIsMobileMenuOpen(false);
   };
 
   const FeatureItem = ({ icon: Icon, color, title, desc }) => (
@@ -29,18 +30,21 @@ const Navbar = () => {
   );
 
   return (
-    <nav style={{ 
-      padding: '20px 60px', 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      borderBottom: '1px solid #f3f4f6',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000
-    }}>
+    <nav className="nav-wrapper">
       <style>{`
+        .nav-wrapper {
+          padding: 0 60px;
+          height: var(--nav-height);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          backgroundColor: #fff;
+          border-bottom: 1px solid #f3f4f6;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          background: white;
+        }
         .feature-hover-item:hover { background-color: #f9fafb; }
         .mega-menu {
           position: absolute;
@@ -65,19 +69,59 @@ const Navbar = () => {
           visibility: visible;
           margin-top: 0;
         }
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+          font-weight: 500;
+          color: #4b5563;
+        }
+        .mobile-menu-btn {
+          display: none;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #4b5563;
+        }
+        @media (max-width: 1024px) {
+          .nav-wrapper { padding: 0 24px; }
+          .nav-links { display: none; }
+          .mobile-menu-btn { display: block; }
+          
+          .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 24px;
+            gap: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            align-items: flex-start;
+          }
+          .features-trigger .mega-menu {
+            display: none;
+          }
+        }
       `}</style>
 
-      <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+      <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }} onClick={() => setIsMobileMenuOpen(false)}>
         <img src="/logo.png" alt="2Do Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
         <span style={{ fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>2Do</span>
       </Link>
       
-      <div style={{ display: 'flex', alignItems: 'center', gap: '32px', fontWeight: '500', color: '#4b5563' }}>
-        <Link to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>Todos</Link>
+      <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+        <Link to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>Todos</Link>
         
-        <div className="features-trigger" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}>
+        <div className="features-trigger" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
           <a href="#benefits" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
-            Benefits <ChevronDown size={16} />
+            Benefits <ChevronDown size={16} className="hidden-mobile" />
           </a>
 
           <div className="mega-menu">
@@ -99,8 +143,17 @@ const Navbar = () => {
         </div>
         
         {user ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: 'inherit' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="user-nav-actions">
+            <style>{`
+              @media (max-width: 1024px) {
+                .user-nav-actions {
+                  flex-direction: column;
+                  width: 100%;
+                  align-items: flex-start !important;
+                }
+              }
+            `}</style>
+            <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>
               <User size={20} /> Profile
             </Link>
             <button 
@@ -112,7 +165,7 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <Link to="/login" className="btn-primary" style={{ backgroundColor: '#10b981', padding: '10px 24px', borderRadius: '8px', textDecoration: 'none', color: '#fff' }}>
+          <Link to="/login" className="btn-primary" style={{ backgroundColor: '#10b981', padding: '10px 24px', borderRadius: '8px', textDecoration: 'none', color: '#fff' }} onClick={() => setIsMobileMenuOpen(false)}>
             Get Started
           </Link>
         )}
@@ -122,4 +175,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
