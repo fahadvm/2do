@@ -36,9 +36,10 @@ const MobileNav = () => {
         .nav-items-container {
           position: relative;
           display: flex;
+          justify-content: space-around;
           align-items: center;
           height: 100%;
-          padding: 0 20px;
+          padding: 0 15px;
           z-index: 10;
         }
 
@@ -50,11 +51,11 @@ const MobileNav = () => {
           text-decoration: none;
           flex: 1;
           transition: 0.3s;
-          margin-right: 15px;
         }
 
+        /* Create a gap for the FAB which sits at 80% */
         .nav-item:nth-child(3) {
-          margin-right: 80px; /* Space for the FAB after removing heart icon */
+          margin-right: 20%; 
         }
 
         .nav-item.active {
@@ -64,7 +65,8 @@ const MobileNav = () => {
 
         .fab-button {
           position: absolute;
-          right: 25px;
+          left: 80%;
+          transform: translateX(-50%);
           top: -15px;
           width: 56px;
           height: 56px;
@@ -81,10 +83,12 @@ const MobileNav = () => {
         }
 
         .fab-button:hover {
-          transform: scale(1.1);
+          transform: scale(1.1) translateX(-50%);
         }
 
-        @media (max-width: 768px) {
+
+
+        @media (max-width: 767px) {
           .mobile-nav-wrapper {
             display: block;
           }
@@ -93,10 +97,11 @@ const MobileNav = () => {
 
       <svg className="nav-background" preserveAspectRatio="none" viewBox="0 0 360 70">
         <path 
-          d="M30 0 H235 C242 0 245 4 250 10 C258 20 270 32 288 32 C306 32 318 20 326 10 C331 4 334 0 341 0 H330 Q360 0 360 30 V40 Q360 70 330 70 H30 Q0 70 0 40 V30 Q0 0 30 0 Z" 
+          d="M30 0 H240 Q260 0 260 12 Q260 32 288 32 Q316 32 316 12 Q316 0 336 0 H330 Q360 0 360 30 V40 Q360 70 330 70 H30 Q0 70 0 40 V30 Q0 0 30 0 Z" 
           fill="#0f172a" 
         />
       </svg>
+
 
       <div className="nav-items-container">
         <Link to="/" className={`nav-item ${isActive('/') ? 'active' : ''}`}>

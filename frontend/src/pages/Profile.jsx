@@ -1,9 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import Navbar from '../components/Navbar';
-import { User, Mail, Calendar, Settings } from 'lucide-react';
+import { User, Mail, Calendar, Settings, LogOut } from 'lucide-react';
 
 const Profile = () => {
   const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
 
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh', color: '#333' }}>
@@ -25,7 +34,7 @@ const Profile = () => {
           grid-template-columns: 1fr 1fr;
           gap: 24px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
           .profile-section {
             padding: 40px 24px;
           }
@@ -92,9 +101,19 @@ const Profile = () => {
               </div>
             </div>
 
-            <button className="btn-primary btn-edit" style={{ marginTop: '40px', backgroundColor: '#10b981', width: '200px', borderRadius: '12px' }}>
-              <Settings size={18} /> Edit Profile
-            </button>
+            <div style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}>
+              <button className="btn-primary btn-edit" style={{ backgroundColor: '#10b981', width: '200px', borderRadius: '12px' }}>
+                <Settings size={18} /> Edit Profile
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="btn-primary btn-edit" 
+                style={{ backgroundColor: '#ef4444', width: '200px', borderRadius: '12px' }}
+              >
+                <LogOut size={18} /> Logout
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

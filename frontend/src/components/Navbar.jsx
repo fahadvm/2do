@@ -75,7 +75,9 @@ const Navbar = () => {
           gap: 32px;
           font-weight: 500;
           color: #4b5563;
+          height: 100%;
         }
+
         .mobile-menu-btn {
           display: none;
           background: none;
@@ -83,7 +85,7 @@ const Navbar = () => {
           cursor: pointer;
           color: #4b5563;
         }
-        @media (max-width: 1024px) {
+        @media (max-width: 767px) {
           .nav-wrapper { padding: 0 24px; }
           .nav-links { display: none; }
           .mobile-menu-btn { display: block; }
@@ -143,9 +145,10 @@ const Navbar = () => {
         </div>
         
         {user ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="user-nav-actions">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', height: '100%' }} className="user-nav-actions">
+
             <style>{`
-              @media (max-width: 1024px) {
+              @media (max-width: 767px) {
                 .user-nav-actions {
                   flex-direction: column;
                   width: 100%;
@@ -153,6 +156,7 @@ const Navbar = () => {
                 }
               }
             `}</style>
+
             <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>
               <User size={20} /> Profile
             </Link>

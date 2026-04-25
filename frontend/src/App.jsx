@@ -12,10 +12,11 @@ function App() {
     <Router>
       <div style={{ paddingBottom: '80px' }} className="mobile-padding">
         <style>{`
-          @media (min-width: 769px) {
+          @media (min-width: 768px) {
             .mobile-padding { padding-bottom: 0 !important; }
           }
         `}</style>
+
 
         <Routes>
 

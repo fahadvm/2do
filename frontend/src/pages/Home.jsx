@@ -43,7 +43,7 @@ const Home = () => {
           border: 8px solid #333;
         }
         
-        @media (max-width: 1024px) {
+        @media (max-width: 767px) {
           .hero-section {
             flex-direction: column;
             padding: 40px 24px;

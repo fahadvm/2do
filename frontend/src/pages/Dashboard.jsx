@@ -62,7 +62,7 @@ const Dashboard = () => {
           display: flex;
           gap: 12px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
           .dashboard-header {
             flex-direction: column;
             text-align: center;
